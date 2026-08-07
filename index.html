@@ -3,34 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Birthday Cake Catcher</title>
+    <title>Birthday Catcher & Wish Maker</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
 <body>
 
-    <h1>🧁 Present Catcher 🧁</h1>
-    
-    <div id="game-container">
-        <canvas id="gameCanvas" width="400" height="500"></canvas>
-        
-        <!-- Start Screen -->
-        <div id="start-screen" class="ui-overlay">
-            <h2 style="margin-bottom: 20px;">Catch the Party Items!</h2>
-            <button id="start-btn">Start Game</button>
-        </div>
+    <!-- Main App Navigation -->
+    <header id="app-nav">
+        <button id="nav-game-btn" class="nav-active">🎮 Play Game</button>
+        <button id="nav-wish-btn">🎁 Send a Wish</button>
+    </header>
 
-        <!-- Game Over Screen -->
-        <div id="game-over-screen" class="ui-overlay hidden">
-            <h2 style="color: #ff5252; margin-bottom: 5px;">Game Over!</h2>
-            <p id="final-score" style="font-size: 1.2rem; margin-bottom: 20px;">Score: 0</p>
-            <button id="restart-btn">Play Again</button>
-        </div>
-    </div>
+    <!-- Game View Mode -->
+    <main id="game-view" class="view-panel">
+        <h1>🧁 Birthday Catcher 🧁</h1>
+        <div id="game-container">
+            <canvas id="gameCanvas" width="400" height="500"></canvas>
+            
+            <!-- Start Screen -->
+            <div id="start-screen" class="ui-overlay">
+                <h2 style="margin-bottom: 20px;">Catch the Party Items!</h2>
+                <button id="start-btn">Start Game</button>
+            </div>
 
-    <div class="instructions">
-        Move the plate using your <strong>Mouse</strong> or <strong>Left/Right Arrow Keys</strong>. <br>
-        Catch 🧁, 🎁, and 🕯️. Avoid the 🥦!
+            <!-- Game Over Screen -->
+            <div id="game-over-screen" class="ui-overlay hidden">
+                <h2 style="color: #ff5252; margin-bottom: 5px;">Game Over!</h2>
+                <p id="final-score" style="font-size: 1.2rem; margin-bottom: 20px;">Score: 0</p>
+                <button id="restart-btn">Play Again</button>
+            </div>
+        </div>
+        <div class="instructions">
+            Move the plate using your <strong>Mouse</strong> or <strong>Left/Right Arrow Keys</strong>. <br>
+            Catch 🧁, 🎁, and 🕯️. Avoid the 🥦!
+        </div>
+    </main>
+
+    <!-- Wish Generator View Mode -->
+    <main id="wish-creator-view" class="view-panel hidden">
+        <h1>🎁 Create a Birthday Wish 🎁</h1>
+        <div class="wish-form-card">
+            <div class="form-group">
+                <label for="recipient-name">Recipient's Name:</label>
+                <input type="text" id="recipient-name" placeholder="Enter name...">
+            </div>
+            <div class="form-group">
+                <label for="custom-message">Your Message:</label>
+                <textarea id="custom-message" rows="3" placeholder="Write a happy birthday message..."></textarea>
+            </div>
+            <button id="generate-wish-btn">Generate Wish Link</button>
+
+            <div id="link-output-container" class="hidden">
+                <p>Share this link with them!</p>
+                <div class="link-box">
+                    <input type="text" id="generated-url" readonly>
+                    <button id="copy-url-btn">Copy</button>
+                </div>
+                <button id="preview-wish-btn" class="secondary-btn">👁️ Preview Wish Card</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Interactive Wish Display Panel (Full Screen Modal) -->
+    <div id="wish-display-overlay" class="hidden">
+        <canvas id="confettiCanvas"></canvas>
+        <div class="wish-card-content">
+            <h1 id="wish-heading">Happy Birthday!</h1>
+            <p id="wish-body">Wishing you an amazing day filled with joy and cake!</p>
+            
+            <div class="interactive-cake-box">
+                <canvas id="cakeCanvas" width="300" height="250"></canvas>
+                <p id="cake-instruction">🕯️ Click/tap the candles to blow them out! 🕯️</p>
+            </div>
+
+            <button id="close-wish-btn" class="secondary-btn">Back to App</button>
+        </div>
     </div>
 
 </body>
